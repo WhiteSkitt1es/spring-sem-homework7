@@ -1,0 +1,9 @@
+spring:
+  application:
+    name:
+      spring_hw_7_1
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none

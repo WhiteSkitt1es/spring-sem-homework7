@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в систему</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="body">
+<section>
+
+    <div >
+        <div >
+            <h2>Вход в систему</h2>
+            <form th:action="@{/login}" method="post" class="form">
+
+                <div class="inputBox">
+                    <label class="lab" for="username">Имя пользователя</label>
+                    <input class="ic" type="text" id="username" name="username"/>
+                </div>
+
+                <div >
+                    <label class="lab" for="password">Пароль</label>
+                    <input class="ic" type="password" id="password" name="password"/>
+                </div>
+
+                <div >
+                    <input class="btn-new" type="submit" value="Войти"/>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

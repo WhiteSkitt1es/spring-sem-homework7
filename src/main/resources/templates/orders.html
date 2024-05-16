@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="body">
+
+<div th:switch="${orders}">
+    <h2 th:case="null">Заявка отсутствует</h2>
+    <div th:case="*">
+        <h2>Заявка на закупку</h2>
+        <table class="border-example">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Наименование</th>
+                <th>Цена закупки</th>
+                <th>Заказ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${orders}">
+                <td th:text="${product.idProduct}"></td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.purchasePriceProduct}"></td>
+                <td th:text="${product.quantity}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Форма для скачивания файла -->
+        <form action="/download/order" method="GET">
+            <button class="btn-new" type="submit">Скачать файл Exel</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

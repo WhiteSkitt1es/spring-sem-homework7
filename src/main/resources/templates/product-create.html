@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create user</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<form action="#" th:action="@{/product-create}" th:object="${product}" method="post">
+    <label for="name">Наименование</label>
+    <input  type="text" th:field="*{name}" id="name">
+    <br>
+
+    <label for="balance_in_stock">Остаток на складе</label>
+    <input  type="text" th:field="*{balance_in_stock}" id="balance_in_stock">
+    <br>
+    <label for="purchase_price">Цена за закупки</label>
+    <input  type="text" th:field="*{purchase_price}" id="purchase_price">
+    <br>
+    <label for="minimum_quantity">Минимальный остаток</label>
+    <input type="text" th:field="*{minimum_quantity}" id="minimum_quantity">
+    <br>
+    <input class="btn-new" type="submit" value="Добавить продукт">
+    <br>
+</form>
+
+</body>
+</html>

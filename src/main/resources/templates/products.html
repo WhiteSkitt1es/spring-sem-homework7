@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="body">
+
+<div th:switch="${products}">
+    <h2 th:case="null">Товары в базе не найдены </h2>
+    <div th:case="*">
+        <h2  >Учет товара</h2>
+        <table class="border-example">
+            <thead>
+            <tr  >
+                <th  >Id</th>
+                <th  >Наименование</th>
+                <th  >Остаток на складе</th>
+                <th  >Минимальный остаток</th>
+                <th >Продажа</th>
+                <th >Приход</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.balance_in_stock}"></td>
+                <td th:text="${product.minimum_quantity}"></td>
+                <td>
+                    <form id="sellForm" action="#" method="post">
+                        <input type="hidden" class="product-id" name="id" th:value="${product.id}">
+                        <input type="number" class="quantity" name="quantity" placeholder="кол-во">
+                        <button class="btn-new" type="button" onclick="sellProduct(this)">Продажа</button>
+                    </form>
+
+                    <script>
+                        function sellProduct(button) {
+                            var form = button.closest('form');
+                            var id = form.querySelector('.product-id').value;
+                            var quantity = form.querySelector('.quantity').value;
+                            var url = '/sell-product/' + id + '/' + quantity;
+                            window.location.href = url;
+                        }
+                    </script>
+
+
+                </td>
+                <td>
+
+
+                    <form id="buyForm" action="#" method="post">
+                        <input type="hidden" class="product-id" name="id" th:value="${product.id}">
+                        <input type="number" class="quantity" name="quantity" placeholder="кол-во">
+                        <button class="btn-new" type="button" onclick="buyProduct(this)">Приход</button>
+                    </form>
+
+                    <script>
+                        function buyProduct(button) {
+                            var form = button.closest('form');
+                            var id = form.querySelector('.product-id').value;
+                            var quantity = form.querySelector('.quantity').value;
+                            var url = '/buy-product/' + id + '/' + quantity;
+                            window.location.href = url;
+                        }
+                    </script>
+
+                </td>
+                <td>
+                    <form id="deleteForm" action="#" method="post">
+                        <input type="hidden" class="delete" name="id" th:value="${product.id}">
+                        <button class="btn-new" type="button" onclick="deleteProduct(this)">Удалить</button>
+                    </form>
+
+                    <script>
+                        function deleteProduct(button) {
+                            var form = button.closest('form');
+                            var id = form.querySelector('.delete').value; // Заменяем '.product-id' на '.delete'
+                            var url = '/product-delete/' + id ;
+                            window.location.href = url;
+                        }
+                    </script>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button  type="button" onclick="location.href='/product-create'" class="btn-new">Добавить новый продукт</button>
+
+    <div>
+        <button  type="button" onclick="location.href='/orders'" class="btn-new">Сформировать заявку</button>
+    </div>
+
+
+</div>
+
+</body>
+</html>

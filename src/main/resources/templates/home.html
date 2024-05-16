@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="body">
+
+<div th:switch="${products}">
+    <h2 th:case="null">Товары в базе не найдены </h2>
+    <div th:case="*">
+        <h2>Учет товара</h2>
+        <table class="border-example">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Наименование</th>
+                <th>Остаток на складе</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.balance_in_stock}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" onclick="location.href='/login'" class="btn-new">Авторизоваться</button>
+
+
+</div>
+
+</body>
+</html>
